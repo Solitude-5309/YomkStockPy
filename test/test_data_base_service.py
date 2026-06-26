@@ -7,10 +7,8 @@ service_dir = current_dir.parent / "src/services"
 sys.path.append(str(service_dir))
 msgs_dir = current_dir.parent / "src/msgs"
 sys.path.append(str(msgs_dir))
-
 import DataBaseService
 import StockDataFrame
-
 
 YomkApi.init(YomkApi.YomkServer(), ["YomkContext", "YomkFunctionPool", "YomkEventLoop"])
 YomkApi.new_service(DataBaseService.DataBaseService, "/DataBaseService")

@@ -8,7 +8,6 @@ import StockDataService
 YomkApi.init(YomkApi.YomkServer(), ["YomkContext", "YomkFunctionPool", "YomkEventLoop"])
 YomkApi.new_service(StockDataService.StockDataService, "/StockDataService")
 
-
 # frequency:
 # "d" 日K
 # "w" 周K
@@ -23,13 +22,12 @@ YomkApi.new_service(StockDataService.StockDataService, "/StockDataService")
 # "2" 前复权
 # "3" 不复权
 
-res = YomkApi.request("/StockDataService/get_stock", 
-                      {"code": "sz.002313", 
-                       "start_date": "2020-01-01", 
-                       "end_date": "2020-12-31",
-                       "query_field": ["date","open","high","low","close","volume","turn"],
-                       "frequency": "d",
-                       "adjustflag": "2"
-                      })
+res = YomkApi.request("/StockDataService/get_stock", {
+                        "code": "sz.002313", 
+                        "start_date": "2020-01-01", 
+                        "end_date": "2020-12-31",
+                        "query_field": ["date","open","high","low","close","volume","turn"],
+                        "frequency": "d",
+                        "adjustflag": "2"})
 df = res.data
 print(df[["date","open","high","low","close","volume","turn"]].head())

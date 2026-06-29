@@ -39,4 +39,4 @@ def save_stock_by_code(code, frequency):
     res = YomkApi.request("/DataBaseService/insert_stock_data", sd)
     print(res.msg)
 
-save_stock_by_code("sz.002313", "d")
+save_stock_by_code("sh.600222", "d")

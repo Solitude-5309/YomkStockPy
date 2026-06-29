@@ -8,21 +8,15 @@ sys.path.append(str(src_dir))
 from boot.bootstrap import initialize
 initialize(["StockDataService", "DataBaseService"])
 
-def get_stock_by_code(code, frequency, start, end):
-    name = code.replace(".", "_") + "_" + frequency
+def get_stock_list():
     res = YomkApi.request("/DataBaseService/connect_sqlite_db", 
                       {
                         "db_name": "../config/stock.db"
                       })
     print(res.msg)
     
-    res = YomkApi.request("/DataBaseService/get_stock_data", 
-                      {
-                        "name": name,
-                        "start": start,
-                        "end": end
-                      })
+    res = YomkApi.request("/DataBaseService/get_stock_list", "")
     print(res.msg)
     print(res.data)
 
-get_stock_by_code("sh.600222", "d", "2026-01-01", "2026-01-31")
+get_stock_list()

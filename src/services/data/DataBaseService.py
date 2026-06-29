@@ -17,7 +17,14 @@ class DataBaseService(YomkApi.YomkService):
         self.install_func("/insert_stock_data", self.insert_stock_data)
         self.install_func("/get_stock_data", self.get_stock_data)
         self.install_func("/get_stock_last_date", self.get_stock_last_date)
+        self.install_func("/table_is_exists", self.table_is_exists)
         
+    def table_is_exists(self, pkg: Any)->YomkApi.YomkResponse:
+        table_name = pkg.get("name")
+        self.sqlite_cursor.execute(f"PRAGMA table_info({table_name})")
+        exists = len(self.sqlite_cursor.fetchall()) > 0
+        return YomkApi.YomkResponse(YomkApi.ResStatus.eOk, self.get_name() + " exec /DataBaseService/table_is_exists success", exists)
+    
     def get_stock_last_date(self, pkg: Any)->YomkApi.YomkResponse:
         name = pkg.get("name")
         query = f"""

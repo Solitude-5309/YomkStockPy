@@ -47,6 +47,13 @@ res = YomkApi.request("/DataBaseService/get_stock_last_date",
 print(res.msg)
 print(res.data)
 
+res = YomkApi.request("/DataBaseService/table_is_exists", 
+                      {
+                        "name": "sz_002313_d"
+                      })
+print(res.msg)
+print(res.data)
+
 res = YomkApi.request("/DataBaseService/get_stock_data", 
                       {
                         "name": "sz_002313_d",

@@ -4,9 +4,9 @@ from pathlib import Path
 current_dir = Path(__file__).resolve().parent
 src_dir = current_dir.parent / "src"
 sys.path.append(str(src_dir))
-from services.data.StockDataService import StockDataService
-YomkApi.init(YomkApi.YomkServer(), ["YomkContext", "YomkFunctionPool", "YomkEventLoop"])
-YomkApi.new_service(StockDataService, "/StockDataService")
+
+from boot.bootstrap import initialize
+initialize(["StockDataService"])
 
 # frequency:
 # "d" 日K

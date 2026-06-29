@@ -39,7 +39,11 @@ def build_stock_table() -> pd.DataFrame:
 
 
 def main() -> None:
-    initialize()
+    initialize([
+        "VolumeRatioScanService", 
+        "TurnoverScanService", 
+        "InstitutionScanService", 
+        "ActivityScoreService"])
     df = build_stock_table()
     config = {
         "volume_ratio": {

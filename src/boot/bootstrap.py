@@ -11,18 +11,30 @@ from services.strategy.ActivityScoreService import ActivityScoreService
 from services.indicator.InstitutionScanService import InstitutionScanService
 from services.indicator.TurnoverScanService import TurnoverScanService
 from services.indicator.VolumeRatioScanService import VolumeRatioScanService
+from services.data.StockDataService import StockDataService
+from services.data.DataBaseService import DataBaseService
 
 _INITIALIZED = False
 
-def initialize() -> None:
+def initialize(srvs) -> None:
     global _INITIALIZED
     if _INITIALIZED:
         return
 
     YomkApi.init(YomkApi.YomkServer(), ["YomkContext", "YomkFunctionPool", "YomkEventLoop"])
-    YomkApi.new_service(VolumeRatioScanService, "/VolumeRatioScanService")
-    YomkApi.new_service(TurnoverScanService, "/TurnoverScanService")
-    YomkApi.new_service(InstitutionScanService, "/InstitutionScanService")
-    YomkApi.new_service(ActivityScoreService, "/ActivityScoreService")
+    
+    cur_srvs = {
+        "StockDataService": StockDataService,
+        "DataBaseService": DataBaseService,
+        "VolumeRatioScanService": VolumeRatioScanService,
+        "TurnoverScanService": TurnoverScanService,
+        "InstitutionScanService": InstitutionScanService,
+        "ActivityScoreService": ActivityScoreService,
+    }
+    
+    for srv_name in srvs:
+        if srv_name in cur_srvs:
+            YomkApi.new_service(cur_srvs[srv_name], f"/{srv_name}")
+        
     _INITIALIZED = True
 

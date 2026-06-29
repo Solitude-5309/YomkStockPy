@@ -5,11 +5,10 @@ from pathlib import Path
 current_dir = Path(__file__).resolve().parent
 src_dir = current_dir.parent / "src"
 sys.path.append(str(src_dir))
-from services.data.DataBaseService import DataBaseService
 from msgs.StockDataFrame import StockDataFrame
 
-YomkApi.init(YomkApi.YomkServer(), ["YomkContext", "YomkFunctionPool", "YomkEventLoop"])
-YomkApi.new_service(DataBaseService, "/DataBaseService")
+from boot.bootstrap import initialize
+initialize(["DataBaseService"])
 
 res = YomkApi.request("/DataBaseService/connect_sqlite_db", 
                       {

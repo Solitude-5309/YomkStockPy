@@ -2,11 +2,11 @@ import YomkApi
 import sys
 from pathlib import Path
 current_dir = Path(__file__).resolve().parent
-service_dir = current_dir.parent / "src/services"
-sys.path.append(str(service_dir))
-import StockDataService
+src_dir = current_dir.parent / "src"
+sys.path.append(str(src_dir))
+from services.data.StockDataService import StockDataService
 YomkApi.init(YomkApi.YomkServer(), ["YomkContext", "YomkFunctionPool", "YomkEventLoop"])
-YomkApi.new_service(StockDataService.StockDataService, "/StockDataService")
+YomkApi.new_service(StockDataService, "/StockDataService")
 
 # frequency:
 # "d" 日K

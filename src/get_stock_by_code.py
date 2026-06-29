@@ -2,16 +2,15 @@ import YomkApi
 import sys
 from pathlib import Path
 current_dir = Path(__file__).resolve().parent
-service_dir = current_dir.parent / "src/services"
-sys.path.append(str(service_dir))
-msgs_dir = current_dir.parent / "src/msgs"
-sys.path.append(str(msgs_dir))
-import StockDataService
-import DataBaseService
+src_dir = current_dir.parent / "src"
+sys.path.append(str(src_dir))
+from services.data.StockDataService import StockDataService
+from services.data.DataBaseService import DataBaseService
+from msgs.StockDataFrame import StockDataFrame
 
 YomkApi.init(YomkApi.YomkServer(), ["YomkContext", "YomkFunctionPool", "YomkEventLoop"])
-YomkApi.new_service(StockDataService.StockDataService, "/StockDataService")
-YomkApi.new_service(DataBaseService.DataBaseService, "/DataBaseService")
+YomkApi.new_service(StockDataService, "/StockDataService")
+YomkApi.new_service(DataBaseService, "/DataBaseService")
 
 def get_stock_by_code(code, frequency):
     name = code.replace(".", "_") + "_" + frequency

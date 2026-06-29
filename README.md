@@ -1,6 +1,6 @@
 # YomkStockPy 简介
 
-v0.0.4
+v0.0.6
 
 ## src运行
 cd src  
@@ -14,4 +14,4 @@ cd test
 export PYTHONPATH=$HOME/YomkServer/install/lib/python3.10/site-packages:$PYTHONPATH  
 python3 test_stock_data_service.py  
 python3 test_data_base_service.py  
-python3 test_active_date_scan_service.py  
+python3 test_activity_score_service.py  

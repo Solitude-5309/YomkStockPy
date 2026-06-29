@@ -40,6 +40,13 @@ res = YomkApi.request("/DataBaseService/get_stock_list", "")
 print(res.msg)
 print(res.data)
 
+res = YomkApi.request("/DataBaseService/get_stock_last_date", 
+                      {
+                        "name": "sz_002313_d"
+                      })
+print(res.msg)
+print(res.data)
+
 res = YomkApi.request("/DataBaseService/get_stock_data", 
                       {
                         "name": "sz_002313_d",

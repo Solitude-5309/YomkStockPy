@@ -16,6 +16,17 @@ class DataBaseService(YomkApi.YomkService):
         self.install_func("/get_stock_list", self.get_stock_list)
         self.install_func("/insert_stock_data", self.insert_stock_data)
         self.install_func("/get_stock_data", self.get_stock_data)
+        self.install_func("/get_stock_last_date", self.get_stock_last_date)
+        
+    def get_stock_last_date(self, pkg: Any)->YomkApi.YomkResponse:
+        name = pkg.get("name")
+        query = f"""
+            SELECT date FROM {name}
+            ORDER BY date DESC
+            LIMIT 1
+        """
+        df = pd.read_sql_query(query, self.sqlite_conn)
+        return YomkApi.YomkResponse(YomkApi.ResStatus.eOk, self.get_name() + " exec /DataBaseService/get_stock_last_date success", df)
         
     def get_stock_data(self, pkg: Any)->YomkApi.YomkResponse:
         name = pkg.get("name")

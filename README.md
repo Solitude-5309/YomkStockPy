@@ -1,7 +1,7 @@
 # YomkStockPy 简介
 
 ## version
-v0.0.10  
+v0.0.11  
 
 ## src运行
 cd src  

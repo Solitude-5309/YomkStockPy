@@ -10,6 +10,30 @@ from boot.bootstrap import initialize
 initialize(["StockDataService", "DataBaseService"])
 
 def save_stock_by_code(code, frequency):
+    res = YomkApi.request("/DataBaseService/connect_sqlite_db", 
+                      {
+                        "db_name": "../config/stock.db"
+                      })
+    print(res.msg)
+    name = code.replace(".", "_") + "_" + frequency
+    
+    res = YomkApi.request("/DataBaseService/table_is_exists", 
+                      {
+                        "name": name
+                      })
+    print(res.msg)
+    print(res.data)
+    
+    if res.data:
+        print("Table already exists")
+        return
+
+    res = YomkApi.request("/DataBaseService/create_table", 
+                        {
+                            "name": name
+                        })
+    print(res.msg)
+    
     res = YomkApi.request("/StockDataService/get_stock", 
                           {"code": code, 
                            "start_date": "1990-01-01", 
@@ -19,19 +43,6 @@ def save_stock_by_code(code, frequency):
                            "adjustflag": "2"
                           })
     df = res.data
-    
-    res = YomkApi.request("/DataBaseService/connect_sqlite_db", 
-                      {
-                        "db_name": "../config/stock.db"
-                      })
-    print(res.msg)
-    name = code.replace(".", "_") + "_" + frequency
-
-    res = YomkApi.request("/DataBaseService/create_table", 
-                        {
-                            "name": name
-                        })
-    print(res.msg)
 
     sd = StockDataFrame()
     sd.table_name = name
@@ -39,4 +50,10 @@ def save_stock_by_code(code, frequency):
     res = YomkApi.request("/DataBaseService/insert_stock_data", sd)
     print(res.msg)
 
-save_stock_by_code("sh.600222", "d")
+with open("../config/stock_code.txt", "r", encoding="utf-8") as f:
+    lines = f.readlines()
+
+for line in lines:
+    line = line.strip()
+    print(line)
+    save_stock_by_code(line, "d")

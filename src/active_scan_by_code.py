@@ -5,14 +5,14 @@ current_dir = Path(__file__).resolve().parent
 src_dir = current_dir.parent / "src"
 sys.path.append(str(src_dir))
 
-from boot.bootstrap import initialize
-initialize([
-    "StockDataService", 
-    "DataBaseService", 
-    "VolumeRatioScanService", 
-    "TurnoverScanService", 
-    "InstitutionScanService", 
-    "ActivityScoreService"])
+from boot.Boot import Boot
+YomkApi.boot(Boot([
+    "/StockDataService", 
+    "/DataBaseService", 
+    "/VolumeRatioScanService", 
+    "/TurnoverScanService", 
+    "/InstitutionScanService", 
+    "/ActivityScoreService"]))
 
 def active_scan_by_code(code, frequency):
     name = code.replace(".", "_") + "_" + frequency

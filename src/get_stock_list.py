@@ -5,8 +5,8 @@ current_dir = Path(__file__).resolve().parent
 src_dir = current_dir.parent / "src"
 sys.path.append(str(src_dir))
 
-from boot.bootstrap import initialize
-initialize(["StockDataService", "DataBaseService"])
+from boot.Boot import Boot
+YomkApi.boot(Boot(["/StockDataService", "/DataBaseService"]))
 
 def get_stock_list():
     res = YomkApi.request("/DataBaseService/connect_sqlite_db", 

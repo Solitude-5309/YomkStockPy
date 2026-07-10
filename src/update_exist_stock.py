@@ -5,9 +5,9 @@ from pathlib import Path
 current_dir = Path(__file__).resolve().parent
 src_dir = current_dir.parent / "src"
 sys.path.append(str(src_dir))
-from msgs.StockDataFrame import StockDataFrame
-from boot.bootstrap import initialize
-initialize(["StockDataService", "DataBaseService"])
+from msgs.YomkMsgDefine import StockDataFrame
+from boot.Boot import Boot
+YomkApi.boot(Boot(["/StockDataService", "/DataBaseService"]))
 
 def update_exist_stock():
     res = YomkApi.request("/DataBaseService/connect_sqlite_db", 

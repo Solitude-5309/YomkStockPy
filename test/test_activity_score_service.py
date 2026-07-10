@@ -7,7 +7,7 @@ from pathlib import Path
 current_dir = Path(__file__).resolve().parent
 src_dir = current_dir.parent / "src"
 sys.path.append(str(src_dir))
-from boot.bootstrap import initialize
+from boot.Boot import Boot
 
 def build_stock_table() -> pd.DataFrame:
     dates = pd.date_range("2020-01-01", periods=90, freq="D")
@@ -39,11 +39,11 @@ def build_stock_table() -> pd.DataFrame:
 
 
 def main() -> None:
-    initialize([
-        "VolumeRatioScanService", 
-        "TurnoverScanService", 
-        "InstitutionScanService", 
-        "ActivityScoreService"])
+    YomkApi.boot(Boot([
+        "/VolumeRatioScanService", 
+        "/TurnoverScanService", 
+        "/InstitutionScanService", 
+        "/ActivityScoreService"]))
     df = build_stock_table()
     config = {
         "volume_ratio": {

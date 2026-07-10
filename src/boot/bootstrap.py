@@ -21,7 +21,7 @@ def initialize(srvs) -> None:
     if _INITIALIZED:
         return
 
-    YomkApi.init(YomkApi.YomkServer(), ["YomkContext", "YomkFunctionPool", "YomkEventLoop"])
+    YomkApi.init()
     
     cur_srvs = {
         "StockDataService": StockDataService,

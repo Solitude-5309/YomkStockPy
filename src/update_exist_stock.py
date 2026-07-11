@@ -5,7 +5,7 @@ from pathlib import Path
 current_dir = Path(__file__).resolve().parent
 src_dir = current_dir.parent / "src"
 sys.path.append(str(src_dir))
-from msgs.YomkMsgDefine import StockDataFrame
+from msgs.YomkMsgs import StockDataFrame
 from boot.Boot import Boot
 YomkApi.boot(Boot(["/StockDataService", "/DataBaseService"]))
 

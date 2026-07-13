@@ -81,7 +81,7 @@ class ActivityScoreService(YomkApi.YomkService):
         results = {}
         for name, url in requests.items():
             resp = YomkApi.request(url, {"df": df, "config": config})
-            if resp.res_status != YomkApi.ResStatus.eOk:
+            if resp.status != YomkApi.ResStatus.eOk:
                 raise ValueError(f"{name} scan failed: {resp.msg}")
             results[name] = resp.data
         return results

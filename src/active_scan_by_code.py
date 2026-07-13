@@ -57,7 +57,7 @@ def active_scan_by_code(code, frequency):
     }
 
     activity_resp = YomkApi.request("/ActivityScoreService/scan", {"df": df, "config": config})
-    if activity_resp.res_status == YomkApi.ResStatus.eOk:
+    if activity_resp.status == YomkApi.ResStatus.eOk:
         print("ActivityScoreService test passed")
         print(activity_resp.data["config"])
 

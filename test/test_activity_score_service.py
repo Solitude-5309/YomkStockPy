@@ -70,19 +70,19 @@ def main() -> None:
     }
 
     volume_resp = YomkApi.request("/VolumeRatioScanService/scan", {"df": df, "config": config})
-    assert volume_resp.res_status == YomkApi.ResStatus.eOk, volume_resp.msg
+    assert volume_resp.status == YomkApi.ResStatus.eOk, volume_resp.msg
     assert any(row["date"] == "2020-01-31" and row["is_breakout"] for row in volume_resp.data["rows"])
 
     turnover_resp = YomkApi.request("/TurnoverScanService/scan", {"df": df, "config": config})
-    assert turnover_resp.res_status == YomkApi.ResStatus.eOk, turnover_resp.msg
+    assert turnover_resp.status == YomkApi.ResStatus.eOk, turnover_resp.msg
     assert any(row["date"] == "2020-01-31" and row["is_breakout"] for row in turnover_resp.data["rows"])
 
     institution_resp = YomkApi.request("/InstitutionScanService/scan", {"df": df, "config": config})
-    assert institution_resp.res_status == YomkApi.ResStatus.eOk, institution_resp.msg
+    assert institution_resp.status == YomkApi.ResStatus.eOk, institution_resp.msg
     assert institution_resp.data["config"]["data_source"] == "price_volume_proxy"
 
     activity_resp = YomkApi.request("/ActivityScoreService/scan", {"df": df, "config": config})
-    assert activity_resp.res_status == YomkApi.ResStatus.eOk, activity_resp.msg
+    assert activity_resp.status == YomkApi.ResStatus.eOk, activity_resp.msg
     dates = [event["date"] for event in activity_resp.data["events"]]
     assert dates == ["2020-01-31", "2020-03-06"], dates
     print("ActivityScoreService test passed")

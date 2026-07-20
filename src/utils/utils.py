@@ -14,7 +14,7 @@ def invalid(msg: str) -> YomkApi.YomkResponse:
 
 
 def error(msg: str) -> YomkApi.YomkResponse:
-    return YomkApi.YomkResponse(YomkApi.ResStatus.eErr, msg, None)
+    return YomkApi.YomkResponse(YomkApi.ResStatus.eNo, msg, None)
 
 
 def extract_dataframe(pkg: Any) -> pd.DataFrame:

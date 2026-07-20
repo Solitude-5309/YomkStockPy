@@ -1,7 +1,7 @@
 # YomkStockPy 简介
 
 ## version
-v0.0.18  
+v0.0.19  
 
 ## linux
 

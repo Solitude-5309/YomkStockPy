@@ -67,7 +67,7 @@ class DataBaseService(YomkApi.YomkService):
             return YomkApi.YomkResponse(YomkApi.ResStatus.eOk, self.get_name() + " exec /DataBaseService/insert_stock_data success")
         except sqlite3.Error as e:
             print(f"insert_stock_data failed: {e}")
-            return YomkApi.YomkResponse(YomkApi.ResStatus.eErr, self.get_name() + f" exec /DataBaseService/insert_stock_data failed: {e}")
+            return YomkApi.YomkResponse(YomkApi.ResStatus.eNo, self.get_name() + f" exec /DataBaseService/insert_stock_data failed: {e}")
         
     def get_stock_list(self, pkg: Any)->YomkApi.YomkResponse:
         try:
@@ -75,7 +75,7 @@ class DataBaseService(YomkApi.YomkService):
             return YomkApi.YomkResponse(YomkApi.ResStatus.eOk, self.get_name() + " exec /DataBaseService/get_stock_list success", stock_list)
         except sqlite3.Error as e:
             print(f"get_stock_list failed: {e}")
-            return YomkApi.YomkResponse(YomkApi.ResStatus.eErr, self.get_name() + f" exec /DataBaseService/get_stock_list failed: {e}")
+            return YomkApi.YomkResponse(YomkApi.ResStatus.eNo, self.get_name() + f" exec /DataBaseService/get_stock_list failed: {e}")
         
     def connect_sqlite_db(self, pkg: Any)->YomkApi.YomkResponse:
         db_name = pkg.get("db_name")
@@ -93,7 +93,7 @@ class DataBaseService(YomkApi.YomkService):
             self.sqlite_cursor = cursor
         except sqlite3.Error as e:
             print(f"connect_sqlite_db {db_name} failed: {e}")
-            return YomkApi.YomkResponse(YomkApi.ResStatus.eErr, self.get_name() + f" exec /DataBaseService/connect_sqlite_db failed: {e}")
+            return YomkApi.YomkResponse(YomkApi.ResStatus.eNo, self.get_name() + f" exec /DataBaseService/connect_sqlite_db failed: {e}")
         return YomkApi.YomkResponse(YomkApi.ResStatus.eOk, self.get_name() + " exec /DataBaseService/connect_sqlite_db success")
 
     def create_table(self, pkg: Any)->YomkApi.YomkResponse:
@@ -116,6 +116,6 @@ class DataBaseService(YomkApi.YomkService):
             self.sqlite_cursor.execute("INSERT OR IGNORE INTO stock_list (code) VALUES (?)", (table_name,))
         except sqlite3.Error as e:
             print(f"create_table {table_name} failed: {e}")
-            return YomkApi.YomkResponse(YomkApi.ResStatus.eErr, self.get_name() + f" exec /DataBaseService/create_table failed: {e}")
+            return YomkApi.YomkResponse(YomkApi.ResStatus.eNo, self.get_name() + f" exec /DataBaseService/create_table failed: {e}")
         
         return YomkApi.YomkResponse(YomkApi.ResStatus.eOk, self.get_name() + " exec /DataBaseService/create_table success")

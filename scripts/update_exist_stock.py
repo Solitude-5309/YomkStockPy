@@ -1,10 +1,8 @@
 import YomkApi
 from datetime import datetime
-import sys
 from pathlib import Path
-current_dir = Path(__file__).resolve().parent
-src_dir = current_dir.parent / "src"
-sys.path.append(str(src_dir))
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from msgs.YomkMsgs import StockDataFrame
 from boot.Boot import Boot
 YomkApi.boot(Boot(["/StockDataService", "/DataBaseService"]))

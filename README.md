@@ -1,12 +1,12 @@
 # YomkStockPy 简介
 
 ## version
-v0.0.19  
+v0.0.20  
 
 ## linux
 
-### src运行
-cd src  
+### scripts运行
+cd scripts  
 export PYTHONPATH=$HOME/YomkServer/install/lib/python3.10/site-packages:$PYTHONPATH  
 python3 save_stock_by_code.py  
 python3 get_stock_list.py   

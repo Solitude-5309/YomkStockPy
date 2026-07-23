@@ -1,9 +1,4 @@
 import YomkApi
-import sys
-from pathlib import Path
-current_dir = Path(__file__).resolve().parent
-src_dir = current_dir.parent / "src"
-sys.path.append(str(src_dir))
 
 from services.strategy.ActivityScoreService import ActivityScoreService
 from services.indicator.InstitutionScanService import InstitutionScanService

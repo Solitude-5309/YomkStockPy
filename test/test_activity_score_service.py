@@ -2,11 +2,9 @@ from __future__ import annotations
 
 import pandas as pd
 import YomkApi
-import sys
 from pathlib import Path
-current_dir = Path(__file__).resolve().parent
-src_dir = current_dir.parent / "src"
-sys.path.append(str(src_dir))
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from boot.Boot import Boot
 
 def build_stock_table() -> pd.DataFrame:
